@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Admin Dashboard</h1>
+</header>
+
+<section>
+    <h2>Add Project</h2>
+    <input id="pimg" placeholder="Image URL">
+    <input id="pname" placeholder="Project Name">
+    <input id="pdesc" placeholder="Description">
+    <button onclick="addProject()">Add Project</button>
+</section>
+
+<section>
+    <h2>Add Client</h2>
+    <input id="cimg" placeholder="Image URL">
+    <input id="cname" placeholder="Client Name">
+    <input id="cdesc" placeholder="Description">
+    <input id="cdesig" placeholder="Designation">
+    <button onclick="addClient()">Add Client</button>
+</section>
+
+<script>
+const API = "http://127.0.0.1:5000";
+
+function addProject() {
+    fetch(API + "/projects", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            image: pimg.value,
+            name: pname.value,
+            description: pdesc.value
+        })
+    }).then(() => alert("Project Added"));
+}
+
+function addClient() {
+    fetch(API + "/clients", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            image: cimg.value,
+            name: cname.value,
+            description: cdesc.value,
+            designation: cdesig.value
+        })
+    }).then(() => alert("Client Added"));
+}
+</script>
+
+</body>
+</html>

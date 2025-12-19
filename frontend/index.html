@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consultation Services</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Consultation, Design & Marketing</h1>
+    <p>We help businesses grow with expert solutions</p>
+</header>
+
+<section>
+    <h2>Our Projects</h2>
+    <div class="grid" id="projects"></div>
+</section>
+
+<section>
+    <h2>Happy Clients</h2>
+    <div class="grid" id="clients"></div>
+</section>
+
+<section>
+    <div class="contact-box">
+        <h3>Get a Free Consultation</h3>
+        <input id="name" placeholder="Full Name">
+        <input id="email" placeholder="Email Address">
+        <input id="mobile" placeholder="Mobile Number">
+        <input id="city" placeholder="City">
+        <button onclick="sendContact()">Get Quick Quote</button>
+    </div>
+</section>
+
+<footer>
+    © 2025 Consultation Services
+</footer>
+
+<script>
+const API = "http://127.0.0.1:5000";
+
+// Projects
+fetch(API + "/projects")
+.then(res => res.json())
+.then(data => {
+    data.forEach(p => {
+        projects.innerHTML += `
+        <div class="card">
+            <img src="${p.image}">
+            <div class="card-content">
+                <h3>${p.name}</h3>
+                <p>${p.description}</p>
+                <button>Read More</button>
+            </div>
+        </div>`;
+    });
+});
+
+// Clients
+fetch(API + "/clients")
+.then(res => res.json())
+.then(data => {
+    data.forEach(c => {
+        clients.innerHTML += `
+        <div class="client-card">
+            <img src="${c.image}">
+            <p>${c.description}</p>
+            <b>${c.name}</b><br>
+            <small>${c.designation}</small>
+        </div>`;
+    });
+});
+
+function sendContact() {
+    fetch(API + "/contact", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            full_name: name.value,
+            email: email.value,
+            mobile: mobile.value,
+            city: city.value
+        })
+    }).then(() => alert("Submitted Successfully"));
+}
+</script>
+
+</body>
+</html>

@@ -101,13 +101,4 @@ SQLite Database (Auto-created)
    ↓
 Landing Page fetches & displays data
 ```
-## UI Design
-* Blue gradient theme inspired by the reference design
-* Card-based project layout
-* Clean and user-friendly interface
-* Responsive grid layout
 
-
-
-Just tell me 👍
-```
